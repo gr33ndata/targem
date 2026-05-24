@@ -9,7 +9,7 @@ description = "English to educated spoken Egyptian Arabic translation tooling."
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-  { name = "Tarek Amr", email = "tarekamr@gmail.com" }
+  { name = "Tarek Amr" }
 ]
 dependencies = []
 

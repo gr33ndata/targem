@@ -1,59 +1,38 @@
 # Tarjim
 
-Python software project for translating English opinion / newsletter writing into educated spoken Egyptian Arabic.
+Public code-and-corpus repository for Tarjim.
 
-The product thesis is simple:
+Tarjim is a Python project for translating English writing into educated spoken Egyptian Arabic with better control over:
 
-- existing models are good enough at adequacy
-- they are not good enough at Egyptian naturalness, register control, and anti-MSA drift
-- the real asset is the corpus, style policy, retrieval strategy, and evaluation harness
+- dialect fidelity
+- register
+- anti-MSA drift
+- corpus-driven few-shot behavior
 
-## Current Scope
+## Scope
 
-This repo is intentionally scaffolded before implementation.
+This repo contains only the publishable software layer and product assets that should live with it:
 
-Included now:
+- Python package scaffold
+- tests scaffold
+- committed translation corpus
 
-- product docs
-- corpus storage
-- Python project layout
-- test folder
-- Git repo boundary
-
-Not included yet:
-
-- model-calling code
-- retrieval code
-- evaluation code
-- CLI or API surface
+It intentionally does **not** contain private workspace documents such as the PRD or vault-native project notes.
 
 ## Layout
 
-- `PRD.md` — product requirements and staged plan
-- `Tarjim.md` — original project thesis / working concept note
-- `corpus/` — hand-curated bilingual assets committed with the repo
-- `src/tarjim/` — future package code
-- `tests/` — future automated tests
-- `pyproject.toml` — Python package metadata
+- `corpus/` — committed bilingual corpus assets
+- `src/tarjim/` — package code
+- `tests/` — automated tests
+- `pyproject.toml` — package metadata
 
-## Git Boundary
+## Git Model
 
-This project should be treated as its own repo.
+This folder is the repository boundary.
 
-If it is linked back into the larger PKM vault later, the right model is **submodule**, not **subtree**:
+Inside the larger vault, the right long-term relationship is:
 
-- `submodule` fits because Tarjim should own its own history, releases, and GitHub remote
-- `subtree` is for copying another repo into this repo, which is not the shape here
+- parent vault project folder outside
+- this `public/` folder as the separately versioned repo
 
-For now, the practical setup is:
-
-- Tarjim is initialized as its own Git repo
-- the parent vault should ignore this folder
-
-## Corpus
-
-The corpus is part of the software asset, not an external afterthought.
-
-Current corpus location:
-
-- `corpus/Tarjim.corpus.yaml`
+If the parent vault ever tracks the public repo formally, the right model is **submodule**, not **subtree**, because this repo should own its own history and remote.
