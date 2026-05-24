@@ -1,13 +1,8 @@
 # Targem
 
-Public code-and-corpus repository for Targem.
+Ask an AI to translate something into Egyptian Arabic and you'll usually get one of two results: formal Fus'ha that no one actually speaks, or an over-corrected street dialect with inconsistent spelling that reads like a caricature. The middle ground — the educated, natural spoken Arabic used in essays, newsletters, and everyday conversation — rarely survives the translation.
 
-Targem is a Python project for translating English writing into educated spoken Egyptian Arabic with better control over:
-
-- dialect fidelity
-- register
-- anti-MSA drift
-- corpus-driven few-shot behavior
+Targem solves this by steering the model with examples. Before each translation, it retrieves the most relevant sentence pairs from a curated bilingual corpus and feeds them to the model as few-shot demonstrations. The model learns your register from the examples, not just from instructions, which keeps the output consistent and grounded.
 
 ## Layout
 
