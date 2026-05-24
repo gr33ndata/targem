@@ -10,6 +10,8 @@ The middle ground — the educated, natural spoken Arabic spoken by well educate
 
 Before each translation, it retrieves the most relevant sentence pairs from a curated bilingual corpus and feeds them to the model as few-shot demonstrations. The model learns your register from the examples, not just from instructions, which keeps the output consistent and grounded.
 
+This README translated into Egyptian Arabic using Targem: [README_ARZ.md](README_ARZ.md)
+
 ## Layout
 
 - `corpus/` — committed bilingual corpus assets
