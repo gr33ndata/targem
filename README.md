@@ -12,6 +12,41 @@ Before each translation, it retrieves the most relevant sentence pairs from a cu
 
 This README translated into Egyptian Arabic using Targem: [README_ARZ.md](README_ARZ.md)
 
+## Usage
+
+```bash
+pip install targem
+
+# translate a string
+targem "Life is a terminal disease."
+
+# translate a file
+targem --file essay.txt
+
+# pipe input
+cat article.txt | targem
+
+# show which corpus examples were used
+targem "Some text." --show-examples
+
+# control how many examples to retrieve (default 5)
+targem "Some text." --k 3
+
+# use OpenAI instead of Claude
+targem "Some text." --provider openai
+
+# override the model
+targem "Some text." --provider openai --model gpt-4-turbo
+```
+
+API keys are read from a `.env` file in the working directory or from environment variables:
+
+```
+ANTHROPIC_API_KEY=...   # for --provider claude (default)
+OPENAI_API_KEY=...      # for --provider openai
+OPENAI_ORG=...          # optional OpenAI org ID
+```
+
 ## Layout
 
 - `corpus/` — committed bilingual corpus assets
