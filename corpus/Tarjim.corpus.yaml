@@ -1,0 +1,108 @@
+version: 1
+source_language: en
+target_language: arz
+target_language_name: Egyptian Arabic
+target_register: educated spoken Egyptian Arabic
+notes: >
+  Hand-curated English -> Egyptian Arabic translation pairs for Tarjim.
+  Extend this file over time. Keep the Arabic side explicitly Egyptian and avoid
+  drifting into Modern Standard Arabic unless intentionally marked elsewhere.
+
+pairs:
+  - english: >
+      Without the information requested in my previous response, I can only give
+      you a general answer, but I hope this helps.
+    egyptian_arabic: >
+      من غير المعلومات اللى طلبتها في ردي اللى فات، أقدر بس أديك إجابة عامة،
+      لكن أتمنى تكون مفيدة.
+
+  - english: >
+      The Dutch expect eye contact when speaking with someone. Looking away too
+      much can read as evasive, distracted, or uninterested even if that is not
+      what you mean.
+    egyptian_arabic: >
+      الهولنديين بيتوقعوا منك تبص في عينيهم وانت بتكلمهم. لو بتبص كتير بعيد
+      بيعتبروها تهرب، تشتت، أو قلة اهتمام حتى لو مش ده المقصود.
+
+  - english: >
+      The text above her head says, “5 facts about men who treat their birthday
+      like a normal day.”
+    egyptian_arabic: >
+      الكتابة فوق راسها بتقول: "٥ حقايق عن الرجالة اللى بتعامل عيد ميلادها
+      كأنه يوم عادي"
+
+  - english: >
+      For example, can you estimate a person’s weight if you know their height?
+      You probably reason that, on average, taller people are heavier than
+      shorter ones. But how much heavier? And is this assumption even correct?
+    egyptian_arabic: >
+      على سبيل المثال، تقدر تخمن وزن حد لو عرفت طوله؟ غالبا حاتفكر إنه في
+      المتوسط الناس الطويلة أتقل من القصيرين. بس أتقل بقد إيه؟ وهل الفرضية
+      ديه صحيحة اصلا؟
+
+  - english: >
+      Europe is seeing a sharp rise in gonorrhea and syphilis cases, with the
+      Netherlands experiencing a doubling of gonorrhea infections and a
+      significant increase in syphilis since 2020.
+    egyptian_arabic: >
+      أوروبا بتشهد زيادة شديدة في حالات السيلان والزهري، وفي هولندا إصابات
+      السيلان إتضاعفت وكمان حالات الزهري زادت بشكل ملحوظ من سنة ٢٠٢٠
+
+  - english: >
+      The report found that rents in major Dutch cities have risen faster than
+      wages, making it harder for young workers to live near their jobs even
+      when they are employed full-time.
+    egyptian_arabic: >
+      التقرير لقى إن الإيجارات إرتفعت أسرع من المرتبات في المدن الهولندية
+      الكبيرة، وده صعّب على الموظفين الشباب إنهم يسكنوا جنب شغلهم حتى لو
+      شغالين فول تايم
+
+  - english: >
+      Life is a terminal disease, and it is sexually transmitted; John Cleese
+    egyptian_arabic: >
+      الحياة مرض قاتل، وبينتقل عن طريق الجنس؛ جون كليز
+
+  - english: >
+      He is an English actor, comedian, screenwriter, producer, and presenter.
+    egyptian_arabic: >
+      هو ممثل إنجليزي وكوميديان وسيناريست ومنتج ومقدم برامج
+
+  - english: >
+      I am young, but I am a thousand years old. I am alone, but my heart is
+      crowded.
+    egyptian_arabic: >
+      أنا شاب لكن عمري ألف سنة وحيد لكن بين ضلوعى زحام
+
+  - english: >
+      He left his club and sold it out a day before an important Confederation
+      Cup match, going to sort out his travel visa so he could leave with his
+      new team. He didn’t care about the big match or the fans who made him.
+      With cold indifference, he sold them out on an important day and played a
+      part in our elimination from the Confederation Cup.
+    egyptian_arabic: >
+      ساب ناديه وباعه قبل يوم من ماتش مهم في الكونفدرالية وراح يخلص تأشيرة
+      السفر علشان يسافر مع فريقة الجديد ومش فارق معاه الماتش المهم ولا الجمهور
+      اللي عمله وبمنتهي البرود باعهم في يوم مهم وإتسبب إننا نخرج من الكونفدرالية
+
+  - english: >
+      I used to think football was a fun and entertaining game until they
+      invented VAR. What do you mean a team scores a goal and then you say,
+      "Sorry, but five minutes ago someone touched the ball, so we’ll cancel
+      the goal and replace it with a penalty for the other team"? That’s just a
+      mess, honestly.
+    egyptian_arabic: >
+      أنا كنت باعتبر الكورة لعبة ممتعة ومسلية لحد ما إخترعوا الفار. يعني إيه
+      فريق يجيب جون وبعدين تقول معلش أصل من خمس دقايق فيه واحد لمس الكورة،
+      فاحنلغي الجول ونبدله بضربة جزاء للفريق التاني. ده إسمه عك والله
+
+  - english: >
+      More music, less podcasts, and less YouTube—that's still my plan, and
+      that's why I discovered Ahmed Saad's new album. Even though I don't like
+      his voice, I like the album because 80% of my opinion is based on the
+      music, 9% on the singer's voice, and 1% on the lyrics, and I like the
+      songs in that order.
+    egyptian_arabic: >
+      مزيكا اكتر وبودكاست ويوتيوب أقل، ديه لسة خطتي وعلشان كده إكتشفت شريط
+      أحمد سعد الجديد. ورغم إني مابحبش صوته بس الشريط عاجبني، علشان ٨٠٪؜ من
+      رأيي مبني على المزيكا و ٩٪؜ على صوت المغني و ١٪؜ على الكلام، والأغاني
+      عجباني بالترتيب ده
