@@ -34,8 +34,9 @@ def translate_with_openai(
     except ImportError as e:
         raise ImportError("Install the openai extra: pip install 'targem[openai]'") from e
 
-    key = api_key or os.environ.get("OPENAI_API_KEY")
-    client = _openai.OpenAI(api_key=key)
+    key = api_key or os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_KEY")
+    org = os.environ.get("OPENAI_ORG")
+    client = _openai.OpenAI(api_key=key, organization=org)
     response = client.chat.completions.create(
         model=model,
         max_tokens=MAX_TOKENS,
