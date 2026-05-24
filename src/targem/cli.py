@@ -13,7 +13,7 @@ except ImportError:
 
 from targem.translate import translate
 
-DEFAULT_CORPUS = Path(__file__).parent.parent.parent.parent / "corpus" / "Targem.corpus.yaml"
+DEFAULT_CORPUS = Path(__file__).parent.parent.parent / "corpus" / "Targem.corpus.yaml"
 
 
 @click.command()
