@@ -1,13 +1,17 @@
 """CLI entry point for Targem."""
 
+import os
 import sys
 from pathlib import Path
 
 import click
 
 try:
-    from dotenv import load_dotenv
-    load_dotenv()
+    from dotenv import find_dotenv, load_dotenv
+
+    dotenv_path = find_dotenv(usecwd=True)
+    if dotenv_path:
+        load_dotenv(dotenv_path, override=False)
 except ImportError:
     pass
 
@@ -16,12 +20,37 @@ from targem.translate import translate
 DEFAULT_CORPUS = Path(__file__).parent.parent.parent / "corpus" / "Targem.corpus.yaml"
 
 
+def resolve_provider(provider: str) -> str:
+    """Pick a provider explicitly or infer it from available environment keys."""
+    if provider != "auto":
+        return provider
+
+    has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    has_openai = bool(os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_KEY"))
+
+    if has_anthropic:
+        return "claude"
+    if has_openai:
+        return "openai"
+
+    raise click.UsageError(
+        "No provider configured. Set ANTHROPIC_API_KEY for Claude or "
+        "OPENAI_API_KEY / OPENAI_KEY for OpenAI, or pass --provider explicitly."
+    )
+
+
 @click.command()
 @click.argument("text", required=False)
 @click.option("--file", "-f", "input_file", type=click.Path(exists=True, path_type=Path), help="Read input text from a file.")
 @click.option("--corpus", type=click.Path(exists=True, path_type=Path), default=None, help="Path to corpus YAML. Defaults to bundled corpus.")
 @click.option("--k", default=5, show_default=True, help="Number of exemplars to retrieve.")
-@click.option("--provider", default="claude", show_default=True, type=click.Choice(["claude", "openai"]), help="Model provider.")
+@click.option(
+    "--provider",
+    default="auto",
+    show_default=True,
+    type=click.Choice(["auto", "claude", "openai"]),
+    help="Model provider. 'auto' prefers Claude if both keys exist, otherwise uses whichever provider is configured.",
+)
 @click.option("--model", default=None, help="Model name override (e.g. gpt-4o, claude-opus-4-7).")
 @click.option("--show-examples", is_flag=True, help="Print retrieved exemplars after translation.")
 @click.option("--verbose", is_flag=True, help="Print exemplars and full prompt before translating.")
@@ -46,6 +75,7 @@ def cli(
         raise click.UsageError("Provide TEXT, --file, or pipe input via stdin.")
 
     corpus_path = corpus or DEFAULT_CORPUS
+    resolved_provider = resolve_provider(provider)
 
     if verbose:
         from targem.corpus import load_corpus
@@ -64,7 +94,7 @@ def cli(
         click.echo(messages[0]["content"], err=True)
         click.echo("── Translation ──", err=True)
 
-    translation, exemplars = translate(source, corpus_path=corpus_path, k=k, provider=provider, model=model)
+    translation, exemplars = translate(source, corpus_path=corpus_path, k=k, provider=resolved_provider, model=model)
 
     click.echo(translation)
 

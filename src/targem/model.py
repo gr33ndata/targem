@@ -17,7 +17,10 @@ def translate_with_claude(
 ) -> str:
     key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not key:
-        print("targem: no ANTHROPIC_API_KEY found in environment or .env", file=sys.stderr)
+        raise SystemExit(
+            "targem: no ANTHROPIC_API_KEY found in environment or .env\n"
+            "  Set ANTHROPIC_API_KEY, or run with --provider openai if you use OpenAI."
+        )
     try:
         client = anthropic.Anthropic(api_key=key)
         response = client.messages.create(
@@ -47,7 +50,10 @@ def translate_with_openai(
     key = api_key or os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_KEY")
     org = os.environ.get("OPENAI_ORG")
     if not key:
-        print("targem: no OPENAI_API_KEY or OPENAI_KEY found in environment or .env", file=sys.stderr)
+        raise SystemExit(
+            "targem: no OPENAI_API_KEY or OPENAI_KEY found in environment or .env\n"
+            "  Set OPENAI_API_KEY or OPENAI_KEY, and optionally OPENAI_ORG."
+        )
     try:
         client = _openai.OpenAI(api_key=key, organization=org)
         response = client.chat.completions.create(
@@ -57,7 +63,10 @@ def translate_with_openai(
         )
         return response.choices[0].message.content.strip()
     except _openai.AuthenticationError as e:
-        raise SystemExit(f"targem: OpenAI authentication failed — check your OPENAI_KEY\n  {e}") from None
+        raise SystemExit(
+            f"targem: OpenAI authentication failed — check OPENAI_API_KEY / OPENAI_KEY"
+            f"\n  {e}"
+        ) from None
     except _openai.RateLimitError as e:
         raise SystemExit(f"targem: OpenAI rate limit or quota exceeded\n  details: {e.body}") from None
     except _openai.APIError as e:
