@@ -14,10 +14,11 @@ This README translated into Egyptian Arabic using Targem: [README_ARZ.md](README
 
 ## Installation
 
-Recommended: install with `uv` in editable mode from the `public/` repo root. That makes the `targem` command available outside this folder while still reflecting code changes you make locally.
+Recommended: install with `uv` in editable mode from the repo root. That makes the `targem` command available anywhere on your machine while still reflecting local code changes.
 
 ```bash
-cd Workshop/MyBiz/Products/Tarjim/public
+# after cloning the repo
+cd /path/to/targem
 uv tool install --editable .
 ```
 
