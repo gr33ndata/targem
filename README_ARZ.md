@@ -1,59 +1,58 @@
 # ترجم
 
-لما تطلب من الذكاء الاصطناعي يترجم حاجة للمصري، غالبًا هتاخد واحد من نتيجتين:
-- فصحى رسمية محدش بيتكلم بيها فعلًا
-- أو لهجة شوارع متكلفة زيادة وتهجيها مش ثابت وبتطلع كاريكاتير
+إسأل أي ذكاء اصطناعي يترجم حاجة للعربية المصرية وعادة هتحصل على نتيجتين:
+- فصحى رسمية (أو MSA) اللي محدش بيتكلمها
+- أو لهجة شعبية مفرطة في التصحيح بإملاء مش متماسك زي الكاريكاتير
 
-المنطقة الوسط ديه — المصري الطبيعي المثقف اللي ناس متعلمة بتكتبه وبتتكلمه — نادرًا ما بتنجو في الترجمة.
+الأرض الوسط — العربية المحكية الطبيعية اللي بيتكلمها المصريين المتعلمين — نادرًا ما بتنجو في الترجمة.
 
-**ترجم بيحل المشكلة ديه عن طريق توجيه النموذج بأمثلة، يعني Few-shot learning (FSL).**
+Targem بيحل ده عن طريق توجيه النموذج بأمثلة، يعني Few-shot learning (FSL).
 
-قبل كل ترجمة، بيسترجع أكتر أزواج جمل شبه النص المطلوب من corpus ثنائي اللغة متظبط بعناية، وبيبعتها للنموذج كأمثلة. النموذج بيتعلم الـ register من الأمثلة، مش من التعليمات وبس، وده بيخلي الناتج أهدى، أثبت، وأقرب للمصري اللي إنت عايزه.
+قبل كل ترجمة، بيسترجع الجمل الزوجية الأكثر صلة من مجموعة بيانات ثنائية اللغة مخصصة وبيقدمها للنموذج كأمثلة قليلة. النموذج بيتعلم أسلوبك من الأمثلة، مش بس من التعليمات، وده بيحافظ على الناتج متماسك ومنطقي.
 
-النسخة العربية من الـ README ده مترجمة بترجم: [README_ARZ.md](README_ARZ.md)
+ملف README ده مترجم للعربية المصرية باستخدام Targem: [README_ARZ.md](README_ARZ.md)
 
-## ليه ترجم مفيد
+## ليه ترجم بيساعد
 
-لو كتبت prompt عادي زي `Translate this to Egyptian Arabic`، غالبًا هتاخد عربي مفهوم، بس لسه بيزحف ناحية `الفصحى`.
+طلب بسيط زي `Translate this to Egyptian Arabic` غالبًا هيطلعلك عربي مفهوم لكن مشدود لـ `MSA`.
 
-مثال input:
+مثال للمدخلات:
 
 ```text
 The Dutch department store that sells everything — and somehow feels like home
 ```
 
-ناتج vanilla LLM المعتاد:
+الناتج النموذجي من LLM:
 
 ```text
 المتجر الهولندي الذي يبيع كل شيء ويمنحك بطريقة ما شعور المنزل
 ```
 
-ناتج أقرب لأسلوب ترجم:
+ناتج بأسلوب Targem:
 
 ```text
 المحل الهولندي اللي بيبيع كل حاجة وبيحسسك إنك في بيتك
 ```
 
 ليه التاني أحسن:
-
 - `اللي` بدل `الذي`
 - `كل حاجة` بدل `كل شيء`
-- `بيحسسك` بدل التركيب الأنشف `يمنحك شعور`
-- الإيقاع كله مصري طبيعي ومثقف، مش عربي متشطب على طريقة الفصحى
+- `بيحسسك` بدل الـ `يمنحك شعور` الجامدة
+- الإيقاع العام بيبان زي العربية المصرية المنطوقة والمتعلمة، مش العربي الرسمي المرتب
 
-وده أصلًا هدف `targem`: مش بس ينقل المعنى، لكن كمان يشد الـ register ناحية المصري اللي إنت فعلًا عايزه.
+الفرق ده هو الميزة في `targem`: مش بس ترجمة المعنى، لكن كمان سحب الأسلوب نحو العربية المصرية اللي فعلا عايزها.
 
 ## التثبيت
 
-الأفضل: ثبّت الأداة بـ `uv` في وضع editable من جذر الـ repo. كده أمر `targem` هيبقى شغال من أي مكان على الجهاز، وأي تعديل محلي هيبان مباشرة. التثبيت الافتراضي بيشمل دعم Claude و OpenAI.
+مُستحسن: تنزل بـ `uv` في وضع التعديل من جذر المستودع. ده بيخلي أمر `targem` متاح في أي مكان على جهازك وفي نفس الوقت يعكس التغييرات في الكود المحلي. التثبيت الافتراضي بيشمل دعم لكلود وOpenAI.
 
 ```bash
-# بعد ما تعمل clone للـ repo
+# after cloning the repo
 cd /path/to/targem
 uv tool install --editable .
 ```
 
-لو مجلد bin بتاع `uv` مش موجود في `PATH`، ضيفه مرة واحدة:
+لو دليل `bin` الخاص بـ `uv` مش موجود بالفعل في الـ `PATH`، ضيفه مرة واحدة:
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
@@ -62,70 +61,69 @@ export PATH="$HOME/.local/bin:$PATH"
 أوامر صيانة مفيدة:
 
 ```bash
-# إعادة تثبيت / تحديث بعد أي تغيير في dependencies أو metadata
+# reinstall / refresh after dependency or metadata changes
 uv tool install --editable --reinstall .
 
-# إزالة الأمر من على الجهاز
+# remove the global command
 uv tool uninstall targem
 ```
 
-وتقدر تشغله من غير تثبيت عام من جذر الـ repo:
+ممكن كمان تشغله من غير تثبيت عالمي من جذر المستودع:
 
 ```bash
 uv run targem "Life is a terminal disease."
 ```
 
-سلوك تحميل environment:
-
-- `targem` الأول بيحترم أي environment variables موجودة بالفعل
-- بعد كده بيحمّل `~/.targem`
-- الـ provider الافتراضي هو `auto`
-- `auto` بيفضل Claude لو الاتنين موجودين، وإلا بيستخدم أي key متاحة
-- الـ keys المدعومة:
+سلوك تحميل البيئة:
+- `targem` أولًا بيحترم متغيرات البيئة الحالية
+- بعدين بيحمل `~/.targem`
+- المزود بيكون افتراضيًا `auto`
+- `auto` بيفضل Claude لو الاتنين مزودين مهيئين؛ وإلا بيستخدم أي مفتاح مزود متاح
+- المفاتيح المدعومة:
   - `ANTHROPIC_API_KEY`
   - `OPENAI_API_KEY`
 
 ## الاستخدام
 
 ```bash
-# ترجمة string
+# translate a string
 targem "Life is a terminal disease."
 
-# ترجمة ملف
+# translate a file
 targem --in essay.txt
 
-# ترجمة من stdin
+# pipe input
 cat article.txt | targem
 
-# كتابة الترجمة مباشرة في ملف
+# write translation directly to a file
 targem "Some text." --out translation.txt
 
-# ترجمة من ملف لملف
+# file-to-file translation
 targem --in article.txt --out translation.txt
 
-# عرض الأمثلة اللي اتسحبت من الـ corpus
+# show which corpus examples were used
 targem "Some text." --show-examples
 
-# طباعة الأمثلة والـ prompt الكامل
+# print retrieved exemplars and full prompt
 targem "Some text." --debug-prompt
 
-# التحكم في عدد الأمثلة المسترجعة (الافتراضي 5)
+# control how many examples to retrieve (default 5)
 targem "Some text." --k 3
 
-# خليه يحدد الـ provider من الـ keys الموجودة
+# let targem infer provider from your keys
 targem "Some text."
 
-# استخدم OpenAI بدل Claude
+# use OpenAI instead of Claude
 targem "Some text." --provider openai
 
-# override للموديل
+# override the model
 targem "Some text." --provider openai --model gpt-4-turbo
 
-# تشخيص provider / network / model call
+# run provider/network/model diagnostics
 targem --doctor --provider openai
 ```
 
-الإعداد المقترح: املا ملف القالب `.targem` اللي في الـ repo، وبعد كده انسخه للـ home directory باسم `~/.targem`.
+الإعداد الموصى بيه: عبّي ملف القالب `.targem` في المستودع، بعدين انسخه لدليل البيت الخاص بيك كـ `~/.targem`.
 
 ```bash
 cp .targem ~/.targem
@@ -134,48 +132,46 @@ cp .targem ~/.targem
 مثال `~/.targem`:
 
 ```env
-ANTHROPIC_API_KEY=...   # لـ --provider claude أو auto
-OPENAI_API_KEY=...      # لـ --provider openai أو auto
+ANTHROPIC_API_KEY=...   # for --provider claude or auto
+OPENAI_API_KEY=...      # for --provider openai or auto
 ```
 
-ترتيب التحميل:
-
-1. environment variables الموجودة بالفعل
+ترتيب القرار:
+1. متغيرات البيئة الحالية
 2. `~/.targem`
 
-وده بيخلي الـ credentials برا الـ repo وبيخلي `targem` يشتغل من أي فولدر على الجهاز.
+ده بيخلّي البيانات السرية برّه المستودع ويخلي `targem` شغال من أي مجلد على الجهاز.
 
-الـ keys المدعومة:
+المفاتيح المدعومة:
 
 ```env
-ANTHROPIC_API_KEY=...   # لـ --provider claude أو auto
-OPENAI_API_KEY=...      # لـ --provider openai أو auto
+ANTHROPIC_API_KEY=...   # for --provider claude or auto
+OPENAI_API_KEY=...      # for --provider openai or auto
 ```
 
-## المجلدات
+## التخطيط
 
-- `corpus/` — ملفات الـ corpus الثنائية المتسجلة مع المشروع
+- `corpus/` — الأصول ثنائية اللغة للكوربوس
 - `src/targem/` — كود الحزمة
-- `tests/` — اختبارات تلقائية
+- `tests/` — اختبارات مؤتمتة
 - `pyproject.toml` — بيانات تعريف الحزمة
 
-## ملاحظات للتطوير
+## ملاحظات التطوير
 
-- التثبيت editable بيربط الأداة مباشرة بالشجرة الحالية، فالتغييرات تحت `src/targem/` بتبان أول ما تشغل `targem`.
-- لو غيرت dependencies أو entry points أو metadata في `pyproject.toml`، شغل `uv tool install --editable --reinstall .` تاني.
+- التثبيت القابل للتحرير بيتوجه للشجرة العاملة دي، عشان كده التغييرات تحت `src/targem/` بتظهر المرة الجاية اللى تشغل فيها `targem`.
+- لو غيرت التبعيات، نقاط الدخول، أو بيانات تعريف الحزمة في `pyproject.toml`، شغل `uv tool install --editable --reinstall .` تاني.
 
 ## Doctor
 
-استخدم `--doctor` لما تحتاج تشخيص من غير ما تلخبطه مع مخرجات الترجمة.
+استخدم `--doctor` لما تحتاج تشخيصات من غير ما تخلطها في سير عمل الترجمة.
 
-الـ checks تشمل:
-
-- الـ provider المختار
-- هل الـ key موجودة
-- هل الباكدج متثبتة
-- هل DNS شغال
-- هل HTTPS شغال
-- هل model call شغالة
+الفحوصات تشمل:
+- المورد المختار
+- المفتاح موجود
+- الحزمة مثبتة
+- يعمل نظام أسماء النطاقات
+- اتصال HTTPS شغال
+- نداء النموذج شغال
 
 مثال:
 
