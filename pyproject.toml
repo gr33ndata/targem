@@ -13,6 +13,7 @@ authors = [
 ]
 dependencies = [
   "anthropic>=0.25",
+  "openai>=1.0",
   "scikit-learn>=1.4",
   "pyyaml>=6.0",
   "click>=8.1",
@@ -23,9 +24,6 @@ dependencies = [
 targem = "targem.cli:cli"
 
 [project.optional-dependencies]
-openai = [
-  "openai>=1.0",
-]
 dev = [
   "pytest>=8.0",
   "pytest-mock>=3.12",

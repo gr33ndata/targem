@@ -1,0 +1,8 @@
+# Copy this file to ~/.targem and fill in the keys you need.
+# Targem loads ~/.targem automatically on startup.
+
+# Required for --provider claude or auto
+ANTHROPIC_API_KEY=
+
+# Required for --provider openai or auto
+OPENAI_API_KEY=

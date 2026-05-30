@@ -12,7 +12,6 @@ def test_translate_with_claude_fails_cleanly_without_key(monkeypatch):
 
 def test_translate_with_openai_fails_cleanly_without_key(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    monkeypatch.delenv("OPENAI_KEY", raising=False)
 
-    with pytest.raises(SystemExit, match="no OPENAI_API_KEY or OPENAI_KEY"):
+    with pytest.raises(SystemExit, match="no OPENAI_API_KEY"):
         translate_with_openai(messages=[])

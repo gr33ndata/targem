@@ -716,6 +716,7 @@ source = { editable = "." }
 dependencies = [
     { name = "anthropic" },
     { name = "click" },
+    { name = "openai" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "scikit-learn" },
@@ -726,22 +727,19 @@ dev = [
     { name = "pytest" },
     { name = "pytest-mock" },
 ]
-openai = [
-    { name = "openai" },
-]
 
 [package.metadata]
 requires-dist = [
     { name = "anthropic", specifier = ">=0.25" },
     { name = "click", specifier = ">=8.1" },
-    { name = "openai", marker = "extra == 'openai'", specifier = ">=1.0" },
+    { name = "openai", specifier = ">=1.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-mock", marker = "extra == 'dev'", specifier = ">=3.12" },
     { name = "python-dotenv", specifier = ">=1.0" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "scikit-learn", specifier = ">=1.4" },
 ]
-provides-extras = ["openai", "dev"]
+provides-extras = ["dev"]
 
 [[package]]
 name = "threadpoolctl"

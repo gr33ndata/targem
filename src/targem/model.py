@@ -18,7 +18,7 @@ def translate_with_claude(
     key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not key:
         raise SystemExit(
-            "targem: no ANTHROPIC_API_KEY found in environment or .env\n"
+            "targem: no ANTHROPIC_API_KEY found in environment or ~/.targem\n"
             "  Set ANTHROPIC_API_KEY, or run with --provider openai if you use OpenAI."
         )
     try:
@@ -45,17 +45,19 @@ def translate_with_openai(
     try:
         import openai as _openai
     except ImportError as e:
-        raise ImportError("Install the openai extra: pip install 'targem[openai]'") from e
+        raise SystemExit(
+            "targem: OpenAI support is not installed in this environment.\n"
+            "  Reinstall targem so core dependencies are refreshed."
+        ) from e
 
-    key = api_key or os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_KEY")
-    org = os.environ.get("OPENAI_ORG")
+    key = api_key or os.environ.get("OPENAI_API_KEY")
     if not key:
         raise SystemExit(
-            "targem: no OPENAI_API_KEY or OPENAI_KEY found in environment or .env\n"
-            "  Set OPENAI_API_KEY or OPENAI_KEY, and optionally OPENAI_ORG."
+            "targem: no OPENAI_API_KEY found in environment or ~/.targem\n"
+            "  Set OPENAI_API_KEY."
         )
     try:
-        client = _openai.OpenAI(api_key=key, organization=org)
+        client = _openai.OpenAI(api_key=key)
         response = client.chat.completions.create(
             model=model,
             max_tokens=MAX_TOKENS,
@@ -64,7 +66,7 @@ def translate_with_openai(
         return response.choices[0].message.content.strip()
     except _openai.AuthenticationError as e:
         raise SystemExit(
-            f"targem: OpenAI authentication failed — check OPENAI_API_KEY / OPENAI_KEY"
+            f"targem: OpenAI authentication failed — check OPENAI_API_KEY"
             f"\n  {e}"
         ) from None
     except _openai.RateLimitError as e:
