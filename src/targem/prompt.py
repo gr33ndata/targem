@@ -33,9 +33,23 @@ def build_messages(
     if re.search(r"\d", query):
         numerals_block = "Numerals: if the source contains numbers, prefer Eastern Arabic numerals like ١٢٣."
 
+    wikilink_block = ""
+    if "[[" in query and "]]" in query:
+        wikilink_block = (
+            "Wikilinks: preserve Obsidian wikilink markup exactly. In [[target|label]], keep the target "
+            "part exactly as written and only translate the label part. If the label is a proper name, "
+            "transliterate it instead of translating it."
+        )
+
     parts = [
         part
-        for part in [examples_block, glossary_block, numerals_block, f"English: {query}\nEgyptian Arabic:"]
+        for part in [
+            examples_block,
+            glossary_block,
+            numerals_block,
+            wikilink_block,
+            f"English: {query}\nEgyptian Arabic:",
+        ]
         if part
     ]
     user_content = "\n\n".join(parts)

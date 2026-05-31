@@ -139,3 +139,40 @@ def test_translate_skips_explicit_numeral_reminder_without_digits():
 
     prompt = captured["messages"][0]["content"]
     assert "prefer Eastern Arabic numerals like ١٢٣" not in prompt
+
+
+def test_translate_adds_wikilink_rule_for_wikilink_input():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "I was reading [[theInternet|The Internet]] last night.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "preserve Obsidian wikilink markup exactly" in prompt
+    assert "keep the target part exactly as written" in prompt
+
+
+def test_translate_skips_wikilink_rule_without_wikilinks():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "I was reading about the internet last night.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "preserve Obsidian wikilink markup exactly" not in prompt
