@@ -1,0 +1,58 @@
+version: 1
+source_language: en
+target_language: arz
+target_language_name: Egyptian Arabic
+notes: >
+  Curated vocabulary and phrase preferences for Targem. These entries are not
+  used as few-shot examples. They are injected into the prompt only when the
+  current English input appears to need them.
+
+entries:
+  - source: passport
+    target: باسبور
+    kind: lexical
+    priority: 90
+
+  - source: calendar
+    target: أجندة
+    kind: lexical
+    priority: 70
+
+  - source: system
+    target: السيستم
+    kind: lexical
+    priority: 70
+
+  - source: cafe
+    target: كافيه
+    kind: lexical
+    priority: 60
+    variants:
+      - café
+
+  - source: beach
+    target: بلاچ
+    kind: lexical
+    priority: 50
+
+  - source: recommend
+    target: يرشح
+    kind: lexical
+    priority: 80
+    variants:
+      - recommended
+      - recommending
+      - recommends
+
+  - source: put down
+    target: يسيب
+    kind: phrase
+    priority: 75
+    variants:
+      - put it down
+      - put the book down
+
+  - source: pyramids
+    target: الأهرامات
+    kind: lexical
+    priority: 40

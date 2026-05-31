@@ -113,7 +113,10 @@ def test_cli_debug_prompt_flag_still_prints_prompt(monkeypatch):
             return self.pairs
 
     monkeypatch.setattr("targem.retrieval.TFIDFRetriever", _Retriever)
-    monkeypatch.setattr("targem.prompt.build_messages", lambda source, exemplars: [{"content": "PROMPT"}])
+    monkeypatch.setattr(
+        "targem.prompt.build_messages",
+        lambda source, exemplars, glossary_entries=None: [{"content": "PROMPT"}],
+    )
 
     result = runner.invoke(cli, ["--debug-prompt", "--provider", "openai", "Hello world."])
 

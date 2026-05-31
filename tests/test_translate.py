@@ -1,11 +1,12 @@
 """Integration tests for the translate pipeline (model call mocked)."""
 
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 from targem.translate import translate
 
 CORPUS_PATH = Path(__file__).parent.parent / "corpus" / "Targem.corpus.yaml"
+GLOSSARY_PATH = Path(__file__).parent.parent / "corpus" / "Targem.glossary.yaml"
 MOCK_TRANSLATION = "ده ترجمة تجريبية بالمصري."
 
 
@@ -64,3 +65,41 @@ def test_translate_passes_provider_to_model():
         translate("Test sentence.", corpus_path=CORPUS_PATH, provider="openai")
 
     assert captured.get("provider") == "openai"
+
+
+def test_translate_injects_relevant_glossary_entries():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "Can you recommend a book for me to read? One I won't put down.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "Preferred vocabulary" in prompt
+    assert "recommend -> يرشح" in prompt
+    assert "put down -> يسيب" in prompt
+
+
+def test_translate_skips_irrelevant_glossary_entries():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "This sentence is about the weather and nothing else.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "passport -> باسبور" not in prompt

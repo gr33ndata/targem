@@ -68,12 +68,6 @@ pairs:
       هو ممثل إنجليزي وكوميديان وسيناريست ومنتج ومقدم برامج
 
   - english: >
-      I am young, but I am a thousand years old. I am alone, but my heart is
-      crowded.
-    egyptian_arabic: >
-      أنا شاب لكن عمري ألف سنة وحيد لكن بين ضلوعى زحام
-
-  - english: >
       He left his club and sold it out a day before an important Confederation
       Cup match, going to sort out his travel visa so he could leave with his
       new team. He didn’t care about the big match or the fans who made him.
@@ -117,7 +111,7 @@ pairs:
       There are around 550 HEMA stores in the Netherlands, plus locations
       across Belgium, France, Germany, and beyond.
     egyptian_arabic: >
-      فيه حوالي ٥٥٠ محل هيما في هولندا، بالإضافة لمحلات في بلجيكا وفرنسا
+      فيه حوالي ٥٥٠ محل هيما في هولندا، وكمان فيه محلات في بلجيكا وفرنسا
       وألمانيا وأماكن تانية
 
   - english: >
@@ -127,3 +121,108 @@ pairs:
     egyptian_arabic: >
       القصص مكتوبة للأطفال الصغيريين قوي. الجمل قصيرة. الكلمات بسيطة.
       ومافيش أحداث دراماتيكية بتحصل، وده الهدف أصلا
+
+  - english: >
+      We live in a world that makes it easy to overcomplicate life.
+    egyptian_arabic: >
+      إحنا عايشين في عالم بيسهل علينا إننا نصعّب الحياة
+
+  - english: >
+      Quitting these habits has made my life feel calmer, lighter and much
+      more intentional.
+    egyptian_arabic: >
+      تبطيل العادات ديه خلاني أحس إن حياتي أهدى وأخف ومقصودة
+
+  - english: >
+      Thank you so much for being a part of this journey!
+    egyptian_arabic: >
+      شكرا جدا إنك بقيت جزء من الرحلة ديه!
+
+  - english: >
+      My friend Emma really wanted me to join her this summer in Stockholm
+      and Copenhagen.
+    egyptian_arabic: >
+      إيما صاحبتي كانت عاوزة جدا إني أروح معاها الصيف ده استوكهولم
+      وكوبنهاجن
+
+  - english: >
+      Why do you think this is happening? Tell me because I need to know the
+      main problem and fix it.
+    egyptian_arabic: >
+      فكرك ليه ده بيحصل؟ قوليلي علشان عاوز أعرف المشكلة الأساسية
+      وأحلها
+
+  - english: >
+      We'll see what happens next week.
+    egyptian_arabic: >
+      حانشوف اللى حايحصل الإسبوع الجاي
+
+  - english: >
+      Don't forget to bring your passport, since you cannot travel without it,
+      and the security will stop you if you do not have it.
+    egyptian_arabic: >
+      ماتنساش تجيب باسبورك معاك، علشان ماينفعش تسافر منغيره والأمن حايوقفك
+      لو معاكش الباسبور
+
+  - english: >
+      Let’s make an appointment to meet next week. I will add it to my
+      calendar. We can meet at the beach or in a cafe.
+    egyptian_arabic: >
+      خلينا نتفق نتقابل الإسبوع الجاي. حاكتبها عندي في أجندتي. ممكن نتقابل
+      عالبلاچ أو في كافيه
+
+  - english: >
+      If I hadn't left that job when I did, I would never have found out what
+      I was actually capable of.
+    egyptian_arabic: >
+      لو ماكنتش سبت شغلي لما مشيت، مكانش زماني عرفت الحاجات اللي فعلا باقدر
+      أعملها
+
+  - english: >
+      If you move to a new country, many ordinary things become harder at
+      first—not because they are complicated, but because you do not yet know
+      the system.
+    egyptian_arabic: >
+      لو هاجرت لبلد تانية، كتير من الحاجات العادية بتبقي أصعب في
+      الأول، مش علشان هي معقدة لكن علشان مش بتبقى عارف السيستم لسة
+
+  - english: >
+      How were the pyramids built?
+    egyptian_arabic: >
+      الأهرامات إتبنت إزاي؟
+
+  - english: >
+      Can you recommended a book for me to read? One that I will not put down
+      in the middle.
+    egyptian_arabic: >
+      ممكن ترشحلي كتاب أقراه؟ كتاب ماسيبوش في نصه
+
+  - english: >
+      Goodbye
+    egyptian_arabic: >
+      مع السلامة
+
+  - english: >
+      Good afternoon
+    egyptian_arabic: >
+      مساء الخير
+
+  - english: >
+      See you later
+    egyptian_arabic: >
+      أشوفك بعدين
+
+  - english: >
+      Dutch politics is coalition politics. No single party ever wins a
+      majority. The result is endless negotiation, fragile governments, and a
+      political system that is genuinely pluralist — sometimes frustratingly
+      so.
+    egyptian_arabic: >
+      السياسة الهولندية هي سياسة التحالفات. مفيش حزب واحد بيكسب الأغلبية
+      لوحده. النتيجة هي مفاوضات مالهاش نهاية، حكومات هشة، ونظام سياسي فعلا
+      متعدد الأطراف - وأحياناً ده بيكون محبط.
+
+  - english: >
+      The Tweede Kamer has 150 seats.
+    egyptian_arabic: >
+      مجلس النواب (Tweede Kamer) فيه ١٥٠ كرسي.

@@ -19,6 +19,7 @@ from targem.model import CLAUDE_DEFAULT, OPENAI_DEFAULT
 from targem.translate import translate
 
 DEFAULT_CORPUS = Path(__file__).parent.parent.parent / "corpus" / "Targem.corpus.yaml"
+DEFAULT_GLOSSARY = Path(__file__).parent.parent.parent / "corpus" / "Targem.glossary.yaml"
 USER_ENV_FILE = Path.home() / ".targem"
 PROVIDER_PACKAGE = {"claude": "anthropic", "openai": "openai"}
 PROVIDER_KEY = {"claude": "ANTHROPIC_API_KEY", "openai": "OPENAI_API_KEY"}
@@ -145,6 +146,7 @@ def cli() -> None:
 @click.argument("text", required=False)
 @click.option("--in", "--file", "-f", "input_file", type=click.Path(exists=True, path_type=Path), help="Read input text from a file.")
 @click.option("--corpus", type=click.Path(exists=True, path_type=Path), default=None, help="Path to corpus YAML. Defaults to bundled corpus.")
+@click.option("--glossary", type=click.Path(exists=True, path_type=Path), default=None, help="Path to glossary YAML. Defaults to bundled glossary.")
 @click.option("--k", default=5, show_default=True, help="Number of exemplars to retrieve.")
 @click.option(
     "--provider",
@@ -170,6 +172,7 @@ def cli(
     text: str | None,
     input_file: Path | None,
     corpus: Path | None,
+    glossary: Path | None,
     k: int,
     provider: str,
     model: str | None,
@@ -188,6 +191,7 @@ def cli(
             translate(
                 "hello",
                 corpus_path=corpus or DEFAULT_CORPUS,
+                glossary_path=glossary or DEFAULT_GLOSSARY,
                 k=1,
                 provider=resolved_provider,
                 model=model,
@@ -209,19 +213,27 @@ def cli(
         raise click.UsageError("Provide TEXT, --file, or pipe input via stdin.")
 
     corpus_path = corpus or DEFAULT_CORPUS
+    glossary_path = glossary or DEFAULT_GLOSSARY
 
     if debug_prompt:
         from targem.corpus import load_corpus
+        from targem.glossary import load_glossary, match_glossary
         from targem.prompt import build_messages
         from targem.retrieval import TFIDFRetriever
         pairs = load_corpus(corpus_path)
         retriever = TFIDFRetriever(pairs)
         exemplars = retriever.retrieve(source, k=k)
-        messages = build_messages(source, exemplars)
+        glossary_entries = load_glossary(glossary_path) if glossary_path.exists() else []
+        matched_glossary = match_glossary(source, glossary_entries)
+        messages = build_messages(source, exemplars, glossary_entries=matched_glossary)
         click.echo("── Retrieved exemplars ──", err=True)
         for ex in exemplars:
             click.echo(f"  EN: {ex.english[:80]}", err=True)
             click.echo(f"  AR: {ex.egyptian_arabic[:80]}", err=True)
+        if matched_glossary:
+            click.echo("── Matched glossary ──", err=True)
+            for entry in matched_glossary:
+                click.echo(f"  {entry.source} -> {entry.target}", err=True)
         click.echo("── Prompt ──", err=True)
         click.echo(messages[0]["content"], err=True)
         click.echo("── Translation ──", err=True)
@@ -229,6 +241,7 @@ def cli(
     translation, exemplars = translate(
         source,
         corpus_path=corpus_path,
+        glossary_path=glossary_path,
         k=k,
         provider=resolved_provider,
         model=model,
