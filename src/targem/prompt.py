@@ -37,8 +37,10 @@ def build_messages(
     if "[[" in query and "]]" in query:
         wikilink_block = (
             "Wikilinks: preserve Obsidian wikilink markup exactly. In [[target|label]], keep the target "
-            "part exactly as written and only translate the label part. If the label is a proper name, "
-            "transliterate it instead of translating it."
+            "part exactly as written and only translate the label part. For bare wikilinks like [[usa]], "
+            "convert them to [[usa|...]] by keeping the target exactly as written and adding an Arabic label. "
+            "If the label is a proper name with a standard Arabic name, use that Arabic name. If it is a "
+            "proper name that cannot naturally be translated, transliterate it instead of translating it."
         )
 
     parts = [

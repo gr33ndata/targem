@@ -158,6 +158,8 @@ def test_translate_adds_wikilink_rule_for_wikilink_input():
     prompt = captured["messages"][0]["content"]
     assert "preserve Obsidian wikilink markup exactly" in prompt
     assert "keep the target part exactly as written" in prompt
+    assert "For bare wikilinks like [[usa]], convert them to [[usa|...]]" in prompt
+    assert "If the label is a proper name with a standard Arabic name, use that Arabic name" in prompt
 
 
 def test_translate_skips_wikilink_rule_without_wikilinks():
