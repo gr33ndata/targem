@@ -1,5 +1,7 @@
 """Prompt construction for Targem."""
 
+import re
+
 from targem.corpus import CorpusPair
 from targem.glossary import GlossaryEntry
 from targem.style_policy import STYLE_RULES, SYSTEM_HEADER
@@ -27,7 +29,15 @@ def build_messages(
             glossary_lines.append(f"- {entry.source} -> {entry.target}")
         glossary_block = "\n".join(glossary_lines)
 
-    parts = [part for part in [examples_block, glossary_block, f"English: {query}\nEgyptian Arabic:"] if part]
+    numerals_block = ""
+    if re.search(r"\d", query):
+        numerals_block = "Numerals: if the source contains numbers, prefer Eastern Arabic numerals like ١٢٣."
+
+    parts = [
+        part
+        for part in [examples_block, glossary_block, numerals_block, f"English: {query}\nEgyptian Arabic:"]
+        if part
+    ]
     user_content = "\n\n".join(parts)
 
     return [

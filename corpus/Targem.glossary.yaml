@@ -23,6 +23,11 @@ entries:
     kind: lexical
     priority: 70
 
+  - source: seat
+    target: كرسي
+    kind: lexical
+    priority: 60
+
   - source: cafe
     target: كافيه
     kind: lexical

@@ -103,3 +103,39 @@ def test_translate_skips_irrelevant_glossary_entries():
 
     prompt = captured["messages"][0]["content"]
     assert "passport -> باسبور" not in prompt
+
+
+def test_translate_adds_explicit_numeral_reminder_for_digit_input():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "The Tweede Kamer has 150 seats.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "prefer Eastern Arabic numerals like ١٢٣" in prompt
+
+
+def test_translate_skips_explicit_numeral_reminder_without_digits():
+    captured = {}
+
+    def capture(messages, **kwargs):
+        captured["messages"] = messages
+        return MOCK_TRANSLATION
+
+    with patch("targem.translate.translate_with_model", side_effect=capture):
+        translate(
+            "The Tweede Kamer has many seats.",
+            corpus_path=CORPUS_PATH,
+            glossary_path=GLOSSARY_PATH,
+        )
+
+    prompt = captured["messages"][0]["content"]
+    assert "prefer Eastern Arabic numerals like ١٢٣" not in prompt
