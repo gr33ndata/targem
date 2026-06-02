@@ -34,7 +34,7 @@ def test_match_glossary_only_returns_relevant_entries():
 def test_match_glossary_prioritizes_phrase_entry():
     entries = [
         GlossaryEntry(source="book", target="كتاب", variants=[], priority=10),
-        GlossaryEntry(source="put down", target="يسيب", variants=[], kind="phrase", priority=50),
+        GlossaryEntry(source="travel visa", target="تأشيرة سفر", variants=[], kind="phrase", priority=50),
     ]
-    matches = match_glossary("I could not put down the book.", entries, max_matches=2)
-    assert matches[0].source == "put down"
+    matches = match_glossary("I need to sort out my travel visa first.", entries, max_matches=2)
+    assert matches[0].source == "travel visa"

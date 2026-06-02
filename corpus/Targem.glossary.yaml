@@ -49,14 +49,6 @@ entries:
       - recommending
       - recommends
 
-  - source: put down
-    target: يسيب
-    kind: phrase
-    priority: 75
-    variants:
-      - put it down
-      - put the book down
-
   - source: pyramids
     target: الأهرامات
     kind: lexical

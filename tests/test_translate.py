@@ -76,15 +76,15 @@ def test_translate_injects_relevant_glossary_entries():
 
     with patch("targem.translate.translate_with_model", side_effect=capture):
         translate(
-            "Can you recommend a book for me to read? One I won't put down.",
+            "Don't forget your passport. I will add it to my calendar.",
             corpus_path=CORPUS_PATH,
             glossary_path=GLOSSARY_PATH,
         )
 
     prompt = captured["messages"][0]["content"]
     assert "Preferred vocabulary" in prompt
-    assert "recommend -> يرشح" in prompt
-    assert "put down -> يسيب" in prompt
+    assert "calendar -> أجندة" in prompt
+    assert "passport -> باسبور" in prompt
 
 
 def test_translate_skips_irrelevant_glossary_entries():
